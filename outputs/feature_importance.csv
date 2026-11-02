@@ -1,0 +1,5 @@
+feature,importance
+pickup_hour,0.8471421496059918
+pickup_weekday,0.07609464803283768
+pickup_month,0.0
+weekend_flag,0.07676320236117054
