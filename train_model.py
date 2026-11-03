@@ -1,9 +1,14 @@
 import pandas as pd
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
-engine = create_engine(
-    "postgresql+psycopg2://postgres:9764283028@localhost:5432/analytics_platform"
-)
+load_dotenv()
+
+engine = create_engine(os.getenv("DATABASE_URL"))
+
+with engine.connect() as conn:
+    print("PostgreSQL connected successfully!")
 
 query = """
 SELECT *

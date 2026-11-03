@@ -1,12 +1,16 @@
 import pandas as pd
+import os
+from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
-sample_data = pd.read_csv("yellow_trip_data.csv")
+load_dotenv()
 
-# PostgreSQL connection
-engine = create_engine(
-    "postgresql+psycopg2://postgres:9764283028@localhost:5432/analytics_platform"
-)
+engine = create_engine(os.getenv("DATABASE_URL"))
+
+with engine.connect() as conn:
+    print("PostgreSQL connected successfully!")
+
+sample_data = pd.read_csv("yellow_trip_data.csv")
 
 # Optional verification
 print(sample_data.shape)
