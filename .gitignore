@@ -1,0 +1,79 @@
+
+# ==============================
+# Python cache files
+# ==============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==============================
+# Virtual environments
+# ==============================
+venv/
+.venv/
+env/
+ENV/
+
+# ==============================
+# Jupyter Notebook
+# ==============================
+.ipynb_checkpoints/
+
+# ==============================
+# IDE and editor files
+# ==============================
+.vscode/
+.idea/
+
+# ==============================
+# Operating system files
+# ==============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==============================
+# Environment variables and secrets
+# ==============================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ==============================
+# Logs and temporary files
+# ==============================
+*.log
+*.tmp
+*.bak
+
+# ==============================
+# Python packaging
+# ==============================
+build/
+dist/
+*.egg-info/
+
+# ==============================
+# Data files
+# ==============================
+data/raw/
+data/interim/
+*.parquet
+*.feather
+
+# ==============================
+# Model artifacts
+# ==============================
+*.pkl
+*.joblib
+*.h5
+*.keras
+*.pt
+*.pth
+
+# ==============================
+# OS / temporary exports
+# ==============================
+$RECYCLE.BIN/
