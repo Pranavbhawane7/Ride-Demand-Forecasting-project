@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 
+# connecting Python and PostgreSQL
 load_dotenv()
 
 engine = create_engine(os.getenv("DATABASE_URL"))
@@ -20,6 +21,7 @@ df = pd.read_sql(query, engine)
 print(df.shape)
 print(df.head())
 
+# Defining iindependent and dependent variable
 X = df[
     [
         "pickup_hour",
@@ -31,10 +33,13 @@ X = df[
 
 y = df["total_rides"]
 
+# Spliting the data in Train and Test Samples
+
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.2, random_state=42)
 
+# Training the data wwith RandomForestRegressor
 from sklearn.ensemble import RandomForestRegressor
 
 model = RandomForestRegressor(n_estimators=100, random_state=42)
@@ -42,6 +47,7 @@ model = RandomForestRegressor(n_estimators=100, random_state=42)
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
+# Model  Evaluation
 from sklearn.metrics import (
     mean_absolute_error,
     mean_squared_error,
@@ -52,7 +58,7 @@ print("MAE:", mean_absolute_error(y_test, y_pred))
 print("RMSE:", mean_squared_error(y_test, y_pred)**0.5)
 print("R2:", r2_score(y_test, y_pred))
 
-
+# Feature Importance
 importance = pd.DataFrame({
     "feature": X.columns,
     "importance": model.feature_importances_
@@ -78,7 +84,7 @@ results.to_csv(
     index=False
 )
 
-
+# Visualizing actual and Predicted Demand
 import matplotlib.pyplot as plt
 
 plt.figure(figsize=(8,6))
@@ -106,6 +112,7 @@ plt.savefig(
 
 plt.show()
 
+# Saving built model
 import os
 import joblib
 
@@ -119,7 +126,7 @@ joblib.dump(
 print("Model saved successfully!")
 
 print(results.head())
-
+# Loading the results to forecast_results table in analytics schema
 results.to_sql(
     "forecast_results",
     con=engine,
